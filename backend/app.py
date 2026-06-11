@@ -22,7 +22,7 @@ jwt = JWTManager(app)
 
 # Allow GitHub Pages origin + localhost for dev
 allowed_origins = [
-    "https://dominikpszczola.github.io",  # update to your GH Pages URL
+    "https://doomin.github.io",  # update to your GH Pages URL
     "http://localhost:5000",
     "http://127.0.0.1:5000",
     "http://localhost:8080",

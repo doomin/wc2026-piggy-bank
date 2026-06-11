@@ -3,7 +3,7 @@
 // ── Config ───────────────────────────────────────────────────────────────────
 // Update this to your Render URL once deployed, e.g.:
 // const API_BASE = 'https://piggy-bank-api.onrender.com';
-const API_BASE = 'http://127.0.0.1:5000';
+const API_BASE = 'https://wc2026-piggy-bank.onrender.com';
 
 // ── State ────────────────────────────────────────────────────────────────────
 let currentUser = null;  // { username, balance }
