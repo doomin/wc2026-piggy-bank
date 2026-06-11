@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Piggy Bank ⚽ World Cup 2026</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="pitch">
+
+  <!-- ── World Cup Banner ──────────────────────────────────────────────── -->
+  <div class="wc-banner">
+    <div class="wc-banner-inner">
+      <span class="trophy">🏆</span>
+      <div class="text-block">
+        <span class="title">WORLD CUP 2026</span>
+        <span class="sub">THE ULTIMATE PIGGY BANK</span>
+      </div>
+      <span class="trophy">🏆</span>
+    </div>
+  </div>
+
+  <div class="main-wrap">
+
+    <!-- ── Auth status bar ──────────────────────────────────────────────── -->
+    <div class="auth-bar" id="auth-bar">
+      <div>
+        <span class="guest-info">▶ GUEST MODE</span>
+        <span class="user-info" style="display:none"></span>
+      </div>
+      <button class="nes-btn dark" id="logout-btn" style="display:none">LOGOUT</button>
+    </div>
+
+    <!-- ── Piggy stage ───────────────────────────────────────────────────── -->
+    <div class="piggy-stage">
+      <div class="piggy-wrap" id="piggy-wrap">
+        <img id="piggy-idle"    src="assets/piggy-idle.svg"    alt="Piggy Bank"/>
+        <img id="piggy-happy"   src="assets/piggy-happy.svg"   alt="Happy Piggy"   class="hidden"/>
+        <img id="piggy-crying"  src="assets/piggy-crying.svg"  alt="Crying Piggy"  class="hidden"/>
+        <img id="piggy-kicking" src="assets/piggy-kicking.svg" alt="Kicking Piggy" class="hidden"/>
+        <img id="piggy-dizzy"   src="assets/piggy-dizzy.svg"   alt="Dizzy Piggy"   class="hidden"/>
+      </div>
+
+      <img id="football" src="assets/football.svg" alt="" aria-hidden="true"/>
+
+      <div class="total-display">
+        <div class="label">TOTAL IN BANK</div>
+        <div class="amount" id="total-amount">… 🪙</div>
+      </div>
+    </div>
+
+    <!-- ── Main panels ───────────────────────────────────────────────────── -->
+    <div class="panels">
+
+      <!-- Auth panel (shown when logged out) -->
+      <div class="panel" id="auth-panel">
+        <div class="panel-title">⚽ PLAYER LOGIN</div>
+
+        <div class="tabs">
+          <button class="tab-btn active" id="login-tab">LOGIN</button>
+          <button class="tab-btn" id="register-tab">REGISTER</button>
+        </div>
+
+        <!-- Login form -->
+        <form id="login-form">
+          <div class="field">
+            <label for="login-username">USERNAME</label>
+            <input class="nes-input" id="login-username" type="text"
+                   autocomplete="username" maxlength="32" required/>
+          </div>
+          <div class="field">
+            <label for="login-password">PASSWORD</label>
+            <input class="nes-input" id="login-password" type="password"
+                   autocomplete="current-password" required/>
+          </div>
+          <div id="login-msg" class="msg"></div>
+          <div class="btn-row">
+            <button class="nes-btn primary" type="submit">▶ LOGIN</button>
+          </div>
+        </form>
+
+        <!-- Register form -->
+        <form id="register-form" style="display:none">
+          <div class="field">
+            <label for="reg-username">CHOOSE USERNAME</label>
+            <input class="nes-input" id="reg-username" type="text"
+                   autocomplete="username" maxlength="32" required/>
+          </div>
+          <div class="field">
+            <label for="reg-password">CHOOSE PASSWORD</label>
+            <input class="nes-input" id="reg-password" type="password"
+                   autocomplete="new-password" minlength="6" required/>
+          </div>
+          <div id="reg-msg" class="msg"></div>
+          <div class="btn-row">
+            <button class="nes-btn gold" type="submit">▶ JOIN</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Action panel (shown when logged in) -->
+      <div class="panel" id="action-panel" style="display:none">
+        <div class="panel-title">🪙 YOUR COINS</div>
+
+        <div class="my-balance" id="my-balance">Your balance: <span>0 🪙</span></div>
+
+        <div class="field">
+          <label>SELECT COINS (1–10, 1 coin = €1)</label>
+          <div class="coin-selector" id="coin-selector"></div>
+        </div>
+
+        <div class="selected-amount" id="selected-amount">
+          Selected: <span>1 coin (€1)</span>
+        </div>
+
+        <div id="donate-form">
+          <div class="btn-row">
+            <button class="nes-btn primary" id="deposit-btn">▲ DONATE</button>
+          </div>
+          <div id="deposit-msg" class="msg"></div>
+        </div>
+
+        <div id="donated-msg" class="donated-banner" style="display:none">
+          ✅ YOU HAVE ALREADY DONATED!<br>THANK YOU FOR SUPPORTING THE POT!
+        </div>
+      </div>
+
+    </div><!-- /.panels -->
+
+    <!-- ── Leaderboard ───────────────────────────────────────────────────── -->
+    <div class="leaderboard-wrap">
+      <div class="panel">
+        <div class="panel-title">🪙 CONTRIBUTORS</div>
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th class="rank">#</th>
+              <th>PLAYER</th>
+            </tr>
+          </thead>
+          <tbody id="lb-body"></tbody>
+        </table>
+        <div id="lb-empty" class="lb-empty" style="display:none">
+          No coins yet — be the first!
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.main-wrap -->
+</div><!-- /.pitch -->
+
+<!-- Coin animation overlay -->
+<div id="coin-field"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

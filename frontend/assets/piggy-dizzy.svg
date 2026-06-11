@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges" width="128" height="128">
+  <!-- Body -->
+  <rect x="16" y="28" width="32" height="24" fill="#F4A7B0"/>
+  <rect x="12" y="32" width="4"  height="16" fill="#F4A7B0"/>
+  <rect x="48" y="32" width="4"  height="16" fill="#F4A7B0"/>
+  <!-- Head - tilted slightly (shifted) -->
+  <rect x="20" y="12" width="24" height="20" fill="#F4A7B0"/>
+  <rect x="16" y="16" width="4"  height="12" fill="#F4A7B0"/>
+  <rect x="44" y="16" width="4"  height="12" fill="#F4A7B0"/>
+  <!-- Snout -->
+  <rect x="24" y="24" width="16" height="10" fill="#F08090"/>
+  <rect x="26" y="26" width="4"  height="4"  fill="#C06070"/>
+  <rect x="34" y="26" width="4"  height="4"  fill="#C06070"/>
+  <!-- X eyes (dizzy) -->
+  <!-- Left eye X -->
+  <rect x="22" y="16" width="2" height="2" fill="#222"/>
+  <rect x="26" y="16" width="2" height="2" fill="#222"/>
+  <rect x="24" y="18" width="2" height="2" fill="#222"/>
+  <rect x="22" y="20" width="2" height="2" fill="#222"/>
+  <rect x="26" y="20" width="2" height="2" fill="#222"/>
+  <!-- Right eye X -->
+  <rect x="38" y="16" width="2" height="2" fill="#222"/>
+  <rect x="42" y="16" width="2" height="2" fill="#222"/>
+  <rect x="40" y="18" width="2" height="2" fill="#222"/>
+  <rect x="38" y="20" width="2" height="2" fill="#222"/>
+  <rect x="42" y="20" width="2" height="2" fill="#222"/>
+  <!-- Wobbly mouth -->
+  <rect x="26" y="31" width="4"  height="2" fill="#C06070"/>
+  <rect x="30" y="33" width="4"  height="2" fill="#C06070"/>
+  <rect x="34" y="31" width="4"  height="2" fill="#C06070"/>
+  <!-- Ear -->
+  <rect x="20" y="8"  width="8"  height="8" fill="#F08090"/>
+  <rect x="36" y="8"  width="8"  height="8" fill="#F08090"/>
+  <!-- Coin slot -->
+  <rect x="26" y="28" width="12" height="3" fill="#C06070"/>
+  <!-- Legs - wobbly -->
+  <rect x="16" y="50" width="8"  height="8" fill="#F08090"/>
+  <rect x="40" y="50" width="8"  height="8" fill="#F08090"/>
+  <!-- Tail -->
+  <rect x="48" y="36" width="4"  height="4" fill="#F08090"/>
+  <rect x="52" y="32" width="4"  height="4" fill="#F08090"/>
+  <rect x="52" y="40" width="4"  height="4" fill="#F08090"/>
+  <!-- Stars around head -->
+  <rect x="8"  y="8"  width="4" height="4" fill="#FFD700"/>
+  <rect x="9"  y="6"  width="2" height="8" fill="#FFD700"/>
+  <rect x="6"  y="9"  width="8" height="2" fill="#FFD700"/>
+  <rect x="52" y="6"  width="4" height="4" fill="#FFD700"/>
+  <rect x="53" y="4"  width="2" height="8" fill="#FFD700"/>
+  <rect x="50" y="7"  width="8" height="2" fill="#FFD700"/>
+  <rect x="12" y="2"  width="4" height="4" fill="#FFD700"/>
+  <rect x="13" y="0"  width="2" height="8" fill="#FFD700"/>
+  <rect x="10" y="3"  width="8" height="2" fill="#FFD700"/>
+  <rect x="48" y="2"  width="4" height="4" fill="#FFD700"/>
+  <rect x="49" y="0"  width="2" height="8" fill="#FFD700"/>
+  <rect x="46" y="3"  width="8" height="2" fill="#FFD700"/>
+</svg>

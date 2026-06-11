@@ -1,0 +1,511 @@
+/* ── Fonts & Reset ───────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark:  #1a6b1a;
+  --green-mid:   #228b22;
+  --green-light: #2db52d;
+  --white:       #ffffff;
+  --gold:        #ffd700;
+  --coin-gold:   #f5c518;
+  --pink:        #f4a7b0;
+  --dark:        #111111;
+  --panel-bg:    rgba(0, 0, 0, 0.72);
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background: var(--green-mid);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+}
+
+/* ── Football Pitch Background ───────────────────────────────────────── */
+.pitch {
+  min-height: 100vh;
+  background:
+    /* centre circle */
+    radial-gradient(circle at 50% 50%, transparent 98px, rgba(255,255,255,0.18) 98px, rgba(255,255,255,0.18) 102px, transparent 102px),
+    /* centre spot */
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5) 5px, transparent 5px),
+    /* halfway line */
+    linear-gradient(to bottom,
+      transparent calc(50% - 1px),
+      rgba(255,255,255,0.18) calc(50% - 1px),
+      rgba(255,255,255,0.18) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    /* grass stripes */
+    repeating-linear-gradient(
+      to bottom,
+      var(--green-dark)  0px,
+      var(--green-dark)  60px,
+      var(--green-mid)   60px,
+      var(--green-mid)   120px
+    );
+  /* field border */
+  border: 4px solid rgba(255,255,255,0.18);
+  position: relative;
+}
+
+/* ── World Cup Banner ────────────────────────────────────────────────── */
+.wc-banner {
+  text-align: center;
+  padding: 0;
+  border-bottom: 4px solid var(--gold);
+  position: relative;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+/* bunting rows */
+.wc-banner::before,
+.wc-banner::after {
+  content: '⚽ ★ ⚽ ★ ⚽ ★ ⚽ ★ ⚽ ★ ⚽ ★ ⚽ ★ ⚽ ★';
+  display: block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  line-height: 1.6;
+  background: #8B0000;
+  color: var(--gold);
+  padding: 2px 0;
+}
+
+/* dark centre strip holds the text */
+.wc-banner-inner {
+  background: #1a0000;
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wc-banner .trophy {
+  font-size: 28px;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px #ffd700);
+}
+
+.wc-banner .text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wc-banner .title {
+  display: block;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  /* full 8-direction pixel outline for max legibility */
+  text-shadow:
+    2px  0   0 #000,
+   -2px  0   0 #000,
+    0    2px 0 #000,
+    0   -2px 0 #000,
+    2px  2px 0 #000,
+   -2px -2px 0 #000,
+    2px -2px 0 #000,
+   -2px  2px 0 #000;
+}
+
+.wc-banner .sub {
+  display: block;
+  font-size: 8px;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow:
+    1px  0   0 #000,
+   -1px  0   0 #000,
+    0    1px 0 #000,
+    0   -1px 0 #000;
+}
+
+/* ── Main layout ─────────────────────────────────────────────────────── */
+.main-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 12px 32px;
+}
+
+/* ── Piggy Stage ─────────────────────────────────────────────────────── */
+.piggy-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.piggy-wrap {
+  position: relative;
+  width: 128px;
+  height: 128px;
+}
+
+.piggy-wrap img {
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
+  position: absolute;
+  top: 0; left: 0;
+  transition: opacity 0.1s;
+}
+
+.piggy-wrap img.hidden { opacity: 0; pointer-events: none; }
+
+.total-display {
+  background: var(--panel-bg);
+  border: 3px solid var(--gold);
+  padding: 8px 14px;
+  font-size: 10px;
+  text-align: center;
+  image-rendering: pixelated;
+}
+
+.total-display .label { color: #aaa; font-size: 8px; margin-bottom: 4px; }
+.total-display .amount { color: var(--gold); font-size: 14px; }
+
+/* ── Football ────────────────────────────────────────────────────────── */
+#football {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 6;
+  /* default hidden; JS sets top/left and adds animation class */
+  opacity: 0;
+}
+
+#football.visible { opacity: 1; }
+
+@keyframes ball-roll-from-left {
+  from { transform: translateX(-55vw) rotate(0deg); }
+  to   { transform: translateX(0)     rotate(900deg); }
+}
+@keyframes ball-roll-from-right {
+  from { transform: translateX(55vw)  rotate(0deg); }
+  to   { transform: translateX(0)     rotate(-900deg); }
+}
+@keyframes ball-fly-to-right {
+  0%   { transform: translate(0,      0)      rotate(900deg);  }
+  35%  { transform: translate(25vw,  -180px)  rotate(1080deg); }
+  100% { transform: translate(58vw,   20px)   rotate(1260deg); }
+}
+@keyframes ball-fly-to-left {
+  0%   { transform: translate(0,      0)      rotate(-900deg);  }
+  35%  { transform: translate(-25vw, -180px)  rotate(-1080deg); }
+  100% { transform: translate(-58vw,  20px)   rotate(-1260deg); }
+}
+
+#football.roll-from-left  { animation: ball-roll-from-left  2.6s linear   forwards; }
+#football.roll-from-right { animation: ball-roll-from-right 2.6s linear   forwards; }
+#football.fly-to-right    { animation: ball-fly-to-right    0.75s ease-in forwards; }
+#football.fly-to-left     { animation: ball-fly-to-left     0.75s ease-in forwards; }
+#football.fall-from-top   { animation: ball-fall-from-top   1.3s linear   forwards; }
+
+@keyframes ball-fall-from-top {
+  0%   { transform: translateY(-110vh)  rotate(0deg);   }
+  68%  { transform: translateY(0)       rotate(500deg); }
+  76%  { transform: translateY(-22px)   rotate(530deg); }
+  84%  { transform: translateY(10px)    rotate(552deg); }
+  91%  { transform: translateY(-10px)   rotate(566deg); }
+  100% { transform: translateY(0)       rotate(576deg); }
+}
+
+@keyframes piggy-dizzy-wobble {
+  0%   { transform: rotate(-6deg) translateY(0);   }
+  25%  { transform: rotate(6deg)  translateY(-5px); }
+  50%  { transform: rotate(-5deg) translateY(0);   }
+  75%  { transform: rotate(5deg)  translateY(-5px); }
+  100% { transform: rotate(-6deg) translateY(0);   }
+}
+.piggy-wrap.dizzy { animation: piggy-dizzy-wobble 0.28s ease infinite; }
+
+/* ── Coin animation container ────────────────────────────────────────── */
+#coin-field {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.coin-anim {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--coin-gold);
+  border: 2px solid #c8970a;
+  box-shadow: inset -3px -3px 0 rgba(0,0,0,0.2);
+  animation: coin-arc 0.8s ease-in forwards;
+}
+
+@keyframes coin-arc {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  50%  { transform: translate(var(--tx-mid), var(--ty-mid)) scale(1.3); opacity: 1; }
+  100% { transform: translate(var(--tx-end), var(--ty-end)) scale(0.2); opacity: 0; }
+}
+
+/* ── Piggy animations ────────────────────────────────────────────────── */
+@keyframes piggy-hop {
+  0%   { transform: translateY(0);   }
+  20%  { transform: translateY(-20px); }
+  40%  { transform: translateY(0);   }
+  60%  { transform: translateY(-12px); }
+  80%  { transform: translateY(0);   }
+  100% { transform: translateY(0);   }
+}
+
+@keyframes piggy-shake {
+  0%   { transform: translateX(0);   }
+  15%  { transform: translateX(-8px); }
+  30%  { transform: translateX(8px);  }
+  45%  { transform: translateX(-6px); }
+  60%  { transform: translateX(6px);  }
+  75%  { transform: translateX(-4px); }
+  100% { transform: translateX(0);   }
+}
+
+.piggy-wrap.hopping { animation: piggy-hop 0.6s ease 2; }
+.piggy-wrap.shaking { animation: piggy-shake 0.5s ease 2; }
+
+/* ── Panels ──────────────────────────────────────────────────────────── */
+.panels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 860px;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 3px solid var(--white);
+  padding: 16px;
+  min-width: 240px;
+  flex: 1 1 240px;
+  image-rendering: pixelated;
+}
+
+/* NES-style pixel border via box-shadow */
+.panel {
+  box-shadow:
+    0 0 0 3px var(--dark),
+    4px 4px 0 3px var(--dark);
+}
+
+.panel-title {
+  font-size: 9px;
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── Forms ───────────────────────────────────────────────────────────── */
+.field { margin-bottom: 10px; }
+.field label { display: block; font-size: 8px; color: #ccc; margin-bottom: 4px; }
+
+.nes-input {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 6px 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  outline: none;
+}
+.nes-input:focus { border-color: var(--gold); }
+
+.nes-btn {
+  display: inline-block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.05s;
+}
+.nes-btn:active { transform: translate(2px, 2px); }
+
+.nes-btn.primary  { background: #92cc41; color: #000; box-shadow: 0 4px 0 #4aa52e, 4px 0 0 #4aa52e; }
+.nes-btn.danger   { background: #e76e55; color: #fff; box-shadow: 0 4px 0 #8c2022, 4px 0 0 #8c2022; }
+.nes-btn.gold     { background: var(--gold); color: #000; box-shadow: 0 4px 0 #a08000, 4px 0 0 #a08000; }
+.nes-btn.dark     { background: #555; color: #fff; box-shadow: 0 4px 0 #222, 4px 0 0 #222; }
+
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+/* ── Coin selector ───────────────────────────────────────────────────── */
+.coin-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.coin-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 3px solid #a08000;
+  background: var(--coin-gold);
+  color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.05s, box-shadow 0.05s;
+  box-shadow: 0 3px 0 #a08000;
+  image-rendering: pixelated;
+}
+.coin-btn:hover  { transform: translateY(-2px); box-shadow: 0 5px 0 #a08000; }
+.coin-btn:active { transform: translateY(1px);  box-shadow: 0 2px 0 #a08000; }
+.coin-btn.selected { background: #fff; border-color: #fff; }
+
+/* ── Action section ──────────────────────────────────────────────────── */
+.selected-amount {
+  font-size: 9px;
+  color: #ccc;
+  margin: 8px 0;
+}
+.selected-amount span { color: var(--gold); }
+
+/* ── Error / success messages ────────────────────────────────────────── */
+.msg {
+  font-size: 8px;
+  padding: 6px 8px;
+  margin-top: 8px;
+  border: 2px solid;
+  display: none;
+}
+.msg.error   { color: #ff6060; border-color: #ff6060; }
+.msg.success { color: #92cc41; border-color: #92cc41; }
+.msg.visible { display: block; }
+
+/* ── Leaderboard ─────────────────────────────────────────────────────── */
+.leaderboard-wrap {
+  width: 100%;
+  max-width: 860px;
+}
+
+.leaderboard-wrap .panel { min-width: 0; }
+
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8px;
+}
+
+.lb-table th {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.lb-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.lb-table tr:last-child td { border-bottom: none; }
+
+.lb-table .rank { color: #aaa; width: 30px; }
+.lb-table .coins-cell { color: var(--gold); }
+
+.lb-empty {
+  text-align: center;
+  color: #666;
+  font-size: 8px;
+  padding: 16px;
+}
+
+/* ── Auth status bar ─────────────────────────────────────────────────── */
+.auth-bar {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--panel-bg);
+  border: 2px solid rgba(255,255,255,0.2);
+  padding: 8px 12px;
+  font-size: 8px;
+}
+
+.auth-bar .user-info { color: #92cc41; }
+.auth-bar .guest-info { color: #aaa; }
+
+/* ── Tabs (login / register toggle) ─────────────────────────────────── */
+.tabs { display: flex; gap: 0; margin-bottom: 14px; }
+.tab-btn {
+  flex: 1;
+  background: #222;
+  color: #888;
+  border: 2px solid #444;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 7px 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.tab-btn.active { background: #333; color: var(--gold); border-color: var(--gold); }
+
+/* ── My balance ──────────────────────────────────────────────────────── */
+.my-balance {
+  font-size: 8px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+.my-balance span { color: var(--gold); }
+
+/* ── Logged-out overlay on action panel ──────────────────────────────── */
+.donated-banner {
+  text-align: center;
+  color: #92cc41;
+  font-size: 8px;
+  line-height: 2.2;
+  padding: 14px 8px;
+  border: 2px solid #92cc41;
+  margin-top: 8px;
+}
+
+.locked-msg {
+  text-align: center;
+  color: #666;
+  font-size: 8px;
+  padding: 16px 8px;
+  line-height: 2;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #555; }
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .wc-banner .title { font-size: 10px; letter-spacing: 1px; }
+  .wc-banner .sub { font-size: 7px; letter-spacing: 2px; }
+  .wc-banner::before, .wc-banner::after { font-size: 9px; letter-spacing: 2px; }
+  .panels { flex-direction: column; }
+}

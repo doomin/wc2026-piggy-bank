@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges" width="32" height="32">
+  <!-- white ball body -->
+  <rect x="3" y="1" width="10" height="14" fill="#ffffff"/>
+  <rect x="1" y="3" width="14" height="10" fill="#ffffff"/>
+  <rect x="2" y="2" width="12" height="12" fill="#ffffff"/>
+  <!-- black outline -->
+  <rect x="3" y="0" width="10" height="1"  fill="#111"/>
+  <rect x="3" y="15" width="10" height="1" fill="#111"/>
+  <rect x="0" y="3" width="1"  height="10" fill="#111"/>
+  <rect x="15" y="3" width="1" height="10" fill="#111"/>
+  <rect x="1" y="1" width="2"  height="2"  fill="#111"/>
+  <rect x="13" y="1" width="2" height="2"  fill="#111"/>
+  <rect x="1" y="13" width="2" height="2"  fill="#111"/>
+  <rect x="13" y="13" width="2" height="2" fill="#111"/>
+  <!-- centre pentagon -->
+  <rect x="6" y="5" width="4" height="6" fill="#111"/>
+  <rect x="5" y="6" width="6" height="4" fill="#111"/>
+  <!-- top patch -->
+  <rect x="6" y="1" width="4" height="3" fill="#111"/>
+  <!-- bottom patch -->
+  <rect x="6" y="12" width="4" height="3" fill="#111"/>
+  <!-- left patch -->
+  <rect x="1" y="6" width="3" height="4" fill="#111"/>
+  <!-- right patch -->
+  <rect x="12" y="6" width="3" height="4" fill="#111"/>
+  <!-- gap lines (white) to separate patches from centre -->
+  <rect x="6" y="4" width="4" height="1"  fill="#fff"/>
+  <rect x="6" y="11" width="4" height="1" fill="#fff"/>
+  <rect x="4" y="6" width="1" height="4"  fill="#fff"/>
+  <rect x="11" y="6" width="1" height="4" fill="#fff"/>
+</svg>
