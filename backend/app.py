@@ -132,7 +132,6 @@ def deposit():
     db.session.add(Transaction(user_id=user.id, amount=amount))
     db.session.commit()
     return jsonify({"balance": user.balance, "deposited": amount})
-    return jsonify({"balance": user.balance, "withdrawn": amount})
 
 
 if __name__ == "__main__":
